@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Tetris.Tetris;
 
 namespace Tetris
 {
     public static class General
     {
-        public static void Initialization()
+        public static void Init()
         {
-            
+            MinoShape.Init();
         }
     }
 }

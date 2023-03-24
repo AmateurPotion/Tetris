@@ -12,7 +12,7 @@ namespace Tetris.Editor
         static Initializer(){
             if (EditorApplication.isPlayingOrWillChangePlaymode)
             {
-                General.Initialization();
+                General.Init();
             }
         }
     }
