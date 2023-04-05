@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Tetris.Utils.Attributes;
 using Tetris.Utils.Extensions;
-using Tetris.Utils.KeyBinds;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.ResourceManagement.Util;
