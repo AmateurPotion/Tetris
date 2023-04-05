@@ -11,22 +11,27 @@ namespace Tetris.Utils
             {
                 if (_instance) return _instance;
 
-                var obj = new GameObject
+                if (Application.isPlaying)
                 {
-                    transform =
+                    var obj = new GameObject
                     {
-                        position = Vector3.zero
-                    }
-                };
+                        transform =
+                        {
+                            position = Vector3.zero
+                        }
+                    };
                 
-                DontDestroyOnLoad(obj);
-                
-                var comp = obj.AddComponent<T>();
-                _instance = comp;
+                    DontDestroyOnLoad(obj);
+                    
+                    var comp = obj.AddComponent<T>();
+                    _instance = comp;
 
-                obj.name = comp.GetType().Name;
+                    obj.name = comp.GetType().Name;
                 
-                return comp;
+                    return comp;
+                }
+
+                return null;
             }
         }
 

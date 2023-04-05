@@ -48,11 +48,11 @@ namespace Tetris.Tetris
                 () => Instantiate(baseComposite, poolParent).GetComponent<TetrominoComposite>(),
                 composite =>
                 {
-                    
+                    composites.Add(composite);
                 },
                 composite =>
                 {
-                    
+                    composites.Remove(composite);
                 },
                 composite =>
                 {
@@ -65,9 +65,11 @@ namespace Tetris.Tetris
         {
         }
 
-        public void SpawnTetromino(int position, MinoShape shape, RuleTile tile)
+        public TetrominoComposite SpawnTetromino(Vector2Int position, MinoShape shape, RuleTile tile)
         {
+            var piece = _compositePool.Get();
             
+            return piece;
         }
     }
 }

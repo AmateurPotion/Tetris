@@ -6,6 +6,7 @@ namespace Tetris.Utils.Extensions
     {
         public static void ClearPath(this PolygonCollider2D collider)
         {
+            collider.pathCount = 0;
         }
     }
 }

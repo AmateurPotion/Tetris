@@ -1,5 +1,4 @@
-﻿using System;
-using Tetris.Utils.Extensions;
+﻿using Tetris.Utils.Extensions;
 using UnityEngine;
 
 namespace Tetris.Tetris

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tetris.Utils.Serialization
 {
@@ -21,5 +22,7 @@ namespace Tetris.Utils.Serialization
         }
 
         public static implicit operator SerializablePair<K, V>((K key, V value) pair) => new (pair.key, pair.value);
+        public static implicit operator KeyValuePair<K, V>(SerializablePair<K, V> pair) => new (pair.key, pair.value);
+        public static implicit operator SerializablePair<K, V>(KeyValuePair<K, V> pair) => new (pair.Key, pair.Value);
     }
 }
