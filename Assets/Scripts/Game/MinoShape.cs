@@ -1,7 +1,7 @@
 ﻿using Tetris.Utils.Serialization;
 using UnityEngine;
 
-namespace Tetris.Tetris
+namespace Tetris.Game
 {
     [CreateAssetMenu(fileName = "new MinoShape", menuName = "Tetris/TetroMino Shape", order = 0)]
     public partial class MinoShape : ScriptableObject

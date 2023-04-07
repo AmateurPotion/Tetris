@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.AddressableAssets;
 
-namespace Tetris.Tetris
+namespace Tetris.Game
 {
     public partial class MinoShape
     {

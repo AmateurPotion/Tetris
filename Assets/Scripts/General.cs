@@ -1,4 +1,4 @@
-using Tetris.Tetris;
+using Tetris.Game;
 
 namespace Tetris
 {

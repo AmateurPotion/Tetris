@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 using UnityEngine.ResourceManagement.Util;
 using UnityEngine.Tilemaps;
 
-namespace Tetris.Tetris
+namespace Tetris.Game
 {
     public class Board : ComponentSingleton<Board>
     {
