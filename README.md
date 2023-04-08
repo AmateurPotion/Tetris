@@ -1,8 +1,13 @@
 # Tetris
  Unity based Web tetris game
 
-## <a href="Assets/TODO/README.md"> TODO </a>
+## Description
 
-<iframe src="Assets/TODO/README.md">
-    <p>이게 왜 안 나올까</p>
-</iframe>
+## [TODO](Assets/TODO/README.md)
+
+### 게임 모드
+
+* 무한 모드
+* 40라인 스프린트 모드
+* PvP 모드
+
