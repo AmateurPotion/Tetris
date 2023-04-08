@@ -3,7 +3,7 @@
 ---
 ## 게임 모드
 
->> 무한 모드
+>> <a href="Gamemode_Infinite.md" target="_self"> 무한 모드 </a>
 > - 로테이션 시스템(srs, srs+, ...)
 > - 사용자 지정 미노
 > - 사용자 지정 테트리스 보드
