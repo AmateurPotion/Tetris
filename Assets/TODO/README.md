@@ -3,19 +3,19 @@
 ---
 ## 게임 모드
 
->> <a href="Gamemode_Infinite.md" target="_self"> 무한 모드 </a>
+>> <a href="Gamemode_Infinite.md"> 무한 모드 </a>
 > - 로테이션 시스템(srs, srs+, ...)
 > - 사용자 지정 미노
 > - 사용자 지정 테트리스 보드
 
 <br/>
 
->> 40라인 스프린트 모드
+>> <a href="Gamemode_40Sprint.md"> 40라인 스프린트 모드 </a>
 > - pps, kpm, 시간, 남은 줄 표시
 
 <br/>
 
->> PvP 모드
+>> <a href="Gamemode_PvP.md"> PvP 모드 </a>
 > - 1대1 or 1대 n
 > - tetr.io 데미지 테이블 사용
 > - pps, apm, 시간 표시
