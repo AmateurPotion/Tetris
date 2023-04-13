@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a8f7c506f548d699ab2ff0d3e22278, type: 3}
   m_Name: Mino_I
   m_EditorClassIdentifier: 
-  width: 1
-  height: 4
-  structure:
-  - content: 01
-  - content: 01
-  - content: 01
-  - content: 01
+  _width: 3
+  _height: 4
+  rotationPoint: {x: 0, y: 0}
+  data: 000000000000

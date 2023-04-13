@@ -1,4 +1,5 @@
 ﻿using Tetris.Game;
+using Tetris.Utils.Extensions;
 using Tetris.Utils.Serialization;
 using UnityEditor;
 using UnityEngine;
@@ -15,77 +16,41 @@ namespace Tetris.Editor.Tetris
             _shape = (MinoShape)target;
         }
 
-        private const int MaxSize = 50;
+        private const byte MaxSize = 50;
 
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
-            GUILayout.Space(5);
-            GUILayout.Label("Size", EditorStyles.boldLabel);
+            // srs rotation point
+            GUILayout.Label("SRS rotation point", EditorStyles.boldLabel);
             GUILayout.Space(5);
             GUILayout.BeginHorizontal();
             {
-                var width = EditorGUILayout.IntField("width", _shape.width);
-                if (width != _shape.width)
-                {
-                    _shape.width = width > MaxSize ? MaxSize : width < 1 ? 1 : width;
-                    EditorUtility.SetDirty(_shape);
-                    return;
-                }
-
+                var x = EditorGUILayout.IntField("x", _shape.rotationPoint.x);
                 GUILayout.Space(10);
+                var y = EditorGUILayout.IntField("y", _shape.rotationPoint.y);
 
-                var height = EditorGUILayout.IntField("height", _shape.height);
-                if (height != _shape.height)
-                {
-                    _shape.height = height > MaxSize ? MaxSize : height < 1 ? 1 : height;
-                    EditorUtility.SetDirty(_shape);
-                    return;
-                }
+                _shape.rotationPoint = new Vector2Int(
+                    x < 0 ? 0 : x < _shape.width ? x : _shape.width - 1,
+                    y < 0 ? 0 : y < _shape.height ? y : _shape.height - 1
+                );
             }
             GUILayout.EndHorizontal();
 
-            var size = (_shape.height, _shape.width);
-            var structure = new bool[size.height][];
-            for (var y = 0; y < size.height; y++)
-            {
-                structure[y] = new bool[size.width];
-            }
-            
-
-            if (_shape.structure != null)
-            {
-                for (var y = 0; y < size.height && y < _shape.structure.Length; y++)
-                {
-                    if (_shape.structure[y] == null) continue;
-
-                    for (var x = 0; x < size.width && x < _shape.structure[y].content.Length; x++)
-                    {
-                        structure[y][x] = _shape.structure[y].content[x];
-                    }
-                }
-            }
-
             GUILayout.Space(10);
+            
             GUILayout.Label("Structure", EditorStyles.boldLabel);
-
-            var container = new SerializableContainer<bool[]>[size.height];
-
             GUILayout.BeginVertical();
             {
-                for (var y = 0; y < size.height; y++)
-                {
-                    container[y] = new SerializableContainer<bool[]>(new bool[size.width]);
-                }
-
-                for (var y = 0; y < size.height; y++)
+                for (var y = 0; y < _shape.height; y++)
                 {
                     GUILayout.BeginHorizontal();
                     GUILayout.FlexibleSpace();
-                    for (var x = 0; x < size.width; x++)
+                    for (var x = 0; x < _shape.width; x++)
                     {
-                        container[y].content[x] = GUILayout.Toggle(structure[y][x], "");
+                        GUI.color = _shape.rotationPoint == new Vector2Int(x, y) ? Color.red : Color.white;
+                        _shape[x, y] = GUILayout.Toggle(_shape[x, y], "");
                     }
 
                     GUILayout.EndHorizontal();
@@ -93,8 +58,9 @@ namespace Tetris.Editor.Tetris
             }
             GUILayout.EndVertical();
 
-            _shape.structure = container;
             EditorUtility.SetDirty(_shape);
         }
+        
+        
     }
 }
