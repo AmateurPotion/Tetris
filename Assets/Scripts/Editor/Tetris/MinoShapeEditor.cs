@@ -16,11 +16,22 @@ namespace Tetris.Editor.Tetris
             _shape = (MinoShape)target;
         }
 
-        private const byte MaxSize = 50;
-
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
+            
+            // Size
+            GUILayout.Label("Size", EditorStyles.boldLabel);
+            GUILayout.Space(5);
+            GUILayout.BeginHorizontal();
+            {
+                _shape.width = (byte)EditorGUILayout.IntField("width", _shape.width);
+                GUILayout.Space(10);
+                _shape.height = (byte)EditorGUILayout.IntField("height", _shape.height);
+
+            }
+            GUILayout.EndHorizontal();
+            GUILayout.Space(10);
 
             // srs rotation point
             GUILayout.Label("SRS rotation point", EditorStyles.boldLabel);

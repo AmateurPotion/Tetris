@@ -1,14 +1,11 @@
-﻿using System;
-using Tetris.Utils.Attributes;
-using Tetris.Utils.Serialization;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Tetris.Game
 {
     [CreateAssetMenu(fileName = "new MinoShape", menuName = "Tetris/TetroMino Shape", order = 0)]
     public partial class MinoShape : ScriptableObject
     {
-        [SerializeField, GetSet("width")] private byte _width = 4;
+        [SerializeField, HideInInspector] private byte _width = 4;
         public byte width
         {
             get => _width;
@@ -29,7 +26,7 @@ namespace Tetris.Game
                 _width = value;
             }
         }
-        [SerializeField, GetSet("height")] private byte _height = 4;
+        [SerializeField, HideInInspector] private byte _height = 4;
         public byte height
         {
             get => _height;
