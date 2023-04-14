@@ -1,6 +1,4 @@
 ﻿using Tetris.Game;
-using Tetris.Utils.Extensions;
-using Tetris.Utils.Serialization;
 using UnityEditor;
 using UnityEngine;
 

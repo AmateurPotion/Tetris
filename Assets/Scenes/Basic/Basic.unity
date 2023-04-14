@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 1185175536}
   - component: {fileID: 1185175538}
   - component: {fileID: 1185175539}
+  - component: {fileID: 1185175540}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -435,11 +436,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cbc1ea4c3f4ebdaa20a425849bb13f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 0}
   map: {fileID: 197124311}
-  tile: {fileID: 11400000, guid: 9ac480930278c4e44bd4f016dd37e1ac, type: 2}
+  _width: 10
   x: 1
   y: 2
-  shape: {fileID: 11400000, guid: 65bd8643ab7c90949a7ca59d8424f9da, type: 2}
+--- !u!114 &1185175540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185175534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 1185175538}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 1931266157}
 --- !u!1 &1301579869
 GameObject:
   m_ObjectHideFlags: 0
