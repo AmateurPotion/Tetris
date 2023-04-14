@@ -7,9 +7,12 @@ namespace Tetris.Utils.Extensions
     {
         public static void SetTiles(this Tilemap tilemap, Vector2Int start, Vector2Int end, TileBase tile)
         {
-            for (var x = start.x; x <= end.x; x++)
+            var newS = end.Min(start);
+            var newE = start.Max(end);
+            
+            for (var x = newS.x; x <= newE.x; x++)
             {
-                for (var y = start.y; y <= end.y; y++)
+                for (var y = newS.y; y <= newE.y; y++)
                 {
                     tilemap.SetTile(new Vector3Int(x, y), tile);
                 }

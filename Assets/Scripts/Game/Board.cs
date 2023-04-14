@@ -11,20 +11,44 @@ namespace Tetris.Game
     public class Board : ComponentSingleton<Board>
     {
         [Header("Component")]
-        [SerializeField] private Tilemap boardTilemap;
-        [SerializeField] private Tilemap backgroundTilemap;
+        [SerializeField] private Tilemap board;
+        [SerializeField] private Tilemap background;
         
         [Header("Properties")]
-        [SerializeField, GetSet("size")] private Vector2Int _size = new (10, 20);
-        public Vector2Int size
+        [SerializeField, GetSet("width")] private byte _width = 10;
+        public byte width
         {
-            get => _size;
+            get => _width;
             set
             {
-                if (value.x < 0) value.X(1);
-                if (value.y < 0) value.Y(1);
-                
-                _size = value;
+                if (background != null)
+                {
+                    var b = _width < value;
+                    background.SetTiles(
+                        new Vector2Int(_width, 0),
+                        new Vector2Int(value - (b ? 1 : 0), _height - 1), 
+                        b ? backgroundTile : null);
+                }
+                _width = value;
+            }
+        }
+        
+        [SerializeField, GetSet("height")] private byte _height = 20;
+
+        public byte height
+        {
+            get => _height;
+            set
+            {
+                if (background != null)
+                {
+                    var b = _height < value;
+                    background.SetTiles(
+                        new Vector2Int(0, _height),
+                        new Vector2Int(_width - 1, value - (b ? 1 : 0)), 
+                        b ? backgroundTile : null);
+                }
+                _height = value;
             }
         }
 
@@ -33,7 +57,7 @@ namespace Tetris.Game
         [Header("Temporary")]
         [SerializeField] private RuleTile backgroundTile;
         
-        [Header("Tetromino Composites")]
+        [Header("Tetromino Composites & Pool")]
         private ObjectPool<TetrominoComposite> _compositePool;
         public List<TetrominoComposite> composites = new();
         [SerializeField] private Transform poolParent;
@@ -41,8 +65,6 @@ namespace Tetris.Game
         
         private void Awake()
         {
-            backgroundTilemap.SetTiles(Vector2Int.zero, new Vector2Int(_size.x, _size.y), backgroundTile);
-            
             _compositePool = new ObjectPool<TetrominoComposite>(
                 () => Instantiate(baseComposite, poolParent).GetComponent<TetrominoComposite>(),
                 composite =>
@@ -60,15 +82,26 @@ namespace Tetris.Game
                 );
         }
 
-        private void Start()
-        {
-        }
-
-        public TetrominoComposite SpawnTetromino(Vector2Int position, MinoShape shape, RuleTile tile)
+        public TetrominoComposite SpawnTetromino(int position, MinoShape shape, RuleTile tile)
         {
             var piece = _compositePool.Get();
             
+            for (var targetX = shape.width - 1; targetX >= 0; targetX--)
+            {
+                for (var targetY = shape.height - 1; targetY >= 0; targetY--)
+                {
+                    if(shape[targetX, targetY]) board.SetTile(new Vector3Int(targetX + position, targetY + height), tile);
+                }
+            }
+            
             return piece;
+        }
+
+        public MinoShape _shape;
+        public RuleTile tile;
+        public void Spawn()
+        {
+            SpawnTetromino(0, _shape, tile);
         }
     }
 }
