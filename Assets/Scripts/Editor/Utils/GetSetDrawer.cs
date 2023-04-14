@@ -49,10 +49,25 @@ namespace Tetris.Editor.Utils
                         isProperty = false;
                         value = b;
                     }
+                    
                     break;
                 }
+
+                case "byte":
+                {
+                    var i = EditorGUI.IntField(position, label, property.intValue);
+                    if (i != property.intValue)
+                    {
+                        isProperty = false;
+                        value = (byte)i;
+                    }
+                    
+                    break;
+                }
+                
                 default:
                 {
+                    Debug.Log(property.type);
                     EditorGUI.PropertyField(position, property, label);
                     break;
                 }
