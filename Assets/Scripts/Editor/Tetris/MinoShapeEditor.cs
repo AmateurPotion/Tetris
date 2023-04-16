@@ -1,4 +1,5 @@
 ﻿using Tetris.Game;
+using Tetris.Utils.Extensions;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace Tetris.Editor.Tetris
             _shape = (MinoShape)target;
         }
 
+        private byte selectMode = 0;
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
@@ -23,22 +25,50 @@ namespace Tetris.Editor.Tetris
             // srs rotation point
             GUILayout.Label("SRS rotation point", EditorStyles.boldLabel);
             GUILayout.Space(5);
-            GUILayout.BeginHorizontal();
+            EditorGUILayout.BeginHorizontal();
             {
-                var x = EditorGUILayout.IntField("x", _shape.rotationPoint.x);
-                GUILayout.Space(10);
-                var y = EditorGUILayout.IntField("y", _shape.rotationPoint.y);
+                _shape.left = EditorGUILayout.Vector2IntField("Left", _shape.left).Clamp((0, 0), (_shape.width - 1,_shape.height - 1));
 
-                _shape.rotationPoint = new Vector2Int(
-                    x < 0 ? 0 : x < _shape.width ? x : _shape.width - 1,
-                    y < 0 ? 0 : y < _shape.height ? y : _shape.height - 1
-                );
+                (selectMode switch
+                {
+                    1 => Color.white,
+                    _ => Color.gray
+                }).GUI(() =>
+                {
+                    if (GUILayout.Button("Select")) selectMode = selectMode == 1 ? (byte)0 : (byte)1;
+                });
             }
-            GUILayout.EndHorizontal();
+            EditorGUILayout.EndHorizontal();
 
+            EditorGUILayout.BeginHorizontal();
+            {
+                _shape.right = EditorGUILayout.Vector2IntField("Right", _shape.right).Clamp((0, 0), (_shape.width - 1,_shape.height - 1));
+                
+                (selectMode switch
+                {
+                    2 => Color.white,
+                    _ => Color.gray
+                }).GUI(() =>
+                {
+                    if (GUILayout.Button("Select")) selectMode = selectMode == 2 ? (byte)0 : (byte)2;
+                });
+            }
+            EditorGUILayout.EndHorizontal();
+
+            // Structure Editor
+            bool clearStructure;
             GUILayout.Space(10);
             
-            GUILayout.Label("Structure", EditorStyles.boldLabel);
+            GUILayout.BeginHorizontal();
+            {
+                GUILayout.Label("Structure", EditorStyles.boldLabel);
+                GUILayout.Space(10);
+                clearStructure = GUILayout.Button("Clear");
+            }
+            GUILayout.EndHorizontal();
+            
+            GUILayout.Space(10);
+
             GUILayout.BeginVertical();
             {
                 for (var y = 0; y < _shape.height; y++)
@@ -47,8 +77,34 @@ namespace Tetris.Editor.Tetris
                     GUILayout.FlexibleSpace();
                     for (var x = 0; x < _shape.width; x++)
                     {
-                        GUI.color = _shape.rotationPoint == new Vector2Int(x, y) ? Color.red : Color.white;
-                        _shape[x, y] = GUILayout.Toggle(_shape[x, y], "");
+                        bool l = _shape.left.Equals(new Vector2Int(x, y)),
+                            r = _shape.right.Equals(new Vector2Int(x, y));
+                        GUI.color = (r, l) switch
+                        {
+                            (true, true) => Color.magenta,
+                            (true, false) => Color.red,
+                            (false, true) => Color.blue,
+                            (false, false) => Color.white
+                        };
+
+                        if (clearStructure)
+                        {
+                            _shape[x, y] = 0;
+                            continue;    
+                        }
+                        
+                        if (GUILayout.Button(_shape[x, y].ToString()))
+                        {
+                            if (selectMode != 0)
+                            {
+                                if (selectMode == 1) _shape.left = new Vector2Int(x, y);
+                                else if (selectMode == 2) _shape.right = new Vector2Int(x, y);
+
+                                selectMode = 0;
+                                continue;
+                            }
+                            _shape[x, y] = _shape[x, y] > 7 ? (byte)0 : (byte)(_shape[x, y] + 1);
+                        }
                     }
 
                     GUILayout.EndHorizontal();
@@ -58,7 +114,5 @@ namespace Tetris.Editor.Tetris
 
             EditorUtility.SetDirty(_shape);
         }
-        
-        
     }
 }

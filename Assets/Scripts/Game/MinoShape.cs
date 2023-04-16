@@ -1,5 +1,6 @@
 ﻿using Tetris.Utils.Attributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Tetris.Game
 {
@@ -14,7 +15,7 @@ namespace Tetris.Game
             {
                 if (data != null)
                 {
-                    var newData = new bool[value * _height];
+                    var newData = new byte[value * _height];
                     for (var y = 0; y < _height; y++)
                     {
                         for (var x = 0; x < _width && x < value; x++)
@@ -35,7 +36,7 @@ namespace Tetris.Game
             {
                 if (data != null)
                 {
-                    var newData = new bool[_width * value];
+                    var newData = new byte[_width * value];
 
                     for (var y = 0; y < _height && y < value; y++)
                     {
@@ -50,16 +51,18 @@ namespace Tetris.Game
             }
         }
 
-        [HideInInspector] public Vector2Int rotationPoint = Vector2Int.zero;
-        [SerializeField, HideInInspector] private bool[] data =
+        [HideInInspector] public Vector2Int left = Vector2Int.zero;
+        [HideInInspector] public Vector2Int right = Vector2Int.zero;
+        
+        [SerializeField, HideInInspector] private byte[] data =
         {
-            false, false, false, false,
-            false, false, false, false,
-            false, false, false, false,
-            false, false, false, false
+            0, 0, 0, 0,
+            0, 0, 0, 0,
+            0, 0, 0, 0,
+            0, 0, 0, 0
         };
 
-        public bool this[int x, int y]
+        public byte this[int x, int y]
         {
             get => data[y * _width + x];
             set => data[y * _width + x] = value;

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 3
   _height: 2
-  rotationPoint: {x: 0, y: 0}
+  left: {x: 0, y: 0}
+  right: {x: 0, y: 0}
   data: 010100000101
