@@ -48,5 +48,13 @@ namespace Tetris.Utils.Extensions
         }
 
         public static Color A(this Color color, float a) => new(color.r, color.g, color.b, a);
+
+        public static void GUI(this Color color, Action action)
+        {
+            var before = UnityEngine.GUI.color;
+            UnityEngine.GUI.color = color;
+            action();
+            UnityEngine.GUI.color = before;
+        }
     }
 }
