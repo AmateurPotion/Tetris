@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 
 namespace Tetris.Game
 {
-    public class Board : ComponentSingleton<Board>
+    public class Field : ComponentSingleton<Field>
     {
         [Header("Component")]
         [SerializeField] private Tilemap board;
@@ -82,7 +82,7 @@ namespace Tetris.Game
                 );
         }
 
-        public TetrominoComposite SpawnTetromino(int position, MinoShape shape, RuleTile tile)
+        public TetrominoComposite SpawnTetromino(int position, MinoShape shape)
         {
             var piece = _compositePool.Get();
             
@@ -90,7 +90,7 @@ namespace Tetris.Game
             {
                 for (var targetY = shape.height - 1; targetY >= 0; targetY--)
                 {
-                    if(shape[targetX, targetY]) board.SetTile(new Vector3Int(targetX + position, targetY + height), tile);
+                    //if(shape[targetX, targetY]) board.SetTile(new Vector3Int(targetX + position, targetY + height), tile);
                 }
             }
             
@@ -98,10 +98,9 @@ namespace Tetris.Game
         }
 
         public MinoShape _shape;
-        public RuleTile tile;
         public void Spawn()
         {
-            SpawnTetromino(0, _shape, tile);
+            SpawnTetromino(0, _shape);
         }
     }
 }
