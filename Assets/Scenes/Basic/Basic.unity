@@ -199,7 +199,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2900,7 +2900,6 @@ MonoBehaviour:
   poolParent: {fileID: 1887868161}
   baseComposite: {fileID: 6872865893728382495, guid: befa4566e81be9f4cbf10a6d8af155ee, type: 3}
   _shape: {fileID: 11400000, guid: 65bd8643ab7c90949a7ca59d8424f9da, type: 2}
-  tile: {fileID: 11400000, guid: 9ac480930278c4e44bd4f016dd37e1ac, type: 2}
 --- !u!1 &1931266155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2955,7 +2954,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

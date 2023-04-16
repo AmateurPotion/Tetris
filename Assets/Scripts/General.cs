@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Tetris.Game;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace Tetris
         // staticMode | false(default) - frame time / true - ms time 
         public static (int frame, float ms, bool staticMode) ARR, DAS, SDF;
 
+        // Contents
+        public static Dictionary<string, MinoShape> shapes => MinoShape.allocated;
         public static void Init()
         {
             MinoShape.Init();
