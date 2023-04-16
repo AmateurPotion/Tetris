@@ -64,8 +64,12 @@ namespace Tetris.Utils.Extensions
         public static Vector2Int Abs(this Vector2Int vector) => new Vector2Int(Math.Abs(vector.x), Math.Abs(vector.y));
         public static Vector2Int Min(this Vector2Int vector1, Vector2Int vector2) => new Vector2Int(Math.Min(vector1.x, vector2.x), Math.Min(vector1.y, vector2.y));
         public static Vector2Int Max(this Vector2Int vector1, Vector2Int vector2) => new Vector2Int(Math.Max(vector1.x, vector2.x), Math.Max(vector1.y, vector2.y));
-        public static Vector2Int Clamp(this Vector2Int vector, Vector2Int min, Vector2Int max) => new Vector2Int(Math.Clamp(vector.x, min.x, max.x), Math.Clamp(vector.y, min.y, max.y));
-        public static Vector2Int Clamp(this Vector2Int vector, int min, int max) => new Vector2Int(Math.Clamp(vector.x, min, max), Math.Clamp(vector.y, min, max));
+
+        public static Vector2Int Clamp(this Vector2Int vector, (int x, int y) min, (int x, int y) max)
+        {
+            vector.Clamp(new Vector2Int(min.x, min.y), new Vector2Int(max.x, max.y));
+            return vector;
+        }
         public static Vector2Int Lerp(this Vector2Int vector1, Vector2Int vector2, float amount) => new Vector2Int(
             (int)(vector1.x + (vector2.x - vector1.x) * amount),
             (int)(vector1.y + (vector2.y - vector1.y) * amount)
