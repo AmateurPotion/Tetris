@@ -1,6 +1,5 @@
 ﻿using Tetris.Utils.Attributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Tetris.Game
 {
@@ -53,7 +52,8 @@ namespace Tetris.Game
 
         [HideInInspector] public Vector2Int left = Vector2Int.zero;
         [HideInInspector] public Vector2Int right = Vector2Int.zero;
-        
+        public bool noRequireSpin = false;
+
         [SerializeField, HideInInspector] private byte[] data =
         {
             0, 0, 0, 0,
