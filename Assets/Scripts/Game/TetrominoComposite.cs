@@ -1,5 +1,4 @@
-﻿using Tetris.Utils.Extensions;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Tetris.Game
 {
@@ -9,10 +8,10 @@ namespace Tetris.Game
         public bool dummySpin = false;
         public int width { get; protected set; }
         public int height { get; protected set; }
-        private byte?[,] _shape;
+        private byte[,] _shape;
         public Vector2Int position;
 
-        public byte?[,] shape
+        public byte[,] shape
         {
             get => _shape;
             set
@@ -23,13 +22,26 @@ namespace Tetris.Game
             }
         }
 
-        public void Init(MinoShape shape, Vector2Int position, Field field)
+        public bool canDown
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public void Init(MinoShape minoShape, Vector2Int startPosition, Field targetField)
         {
             dummySpin = false;
+            shape = minoShape.GetShape();
+            position = startPosition;
+            field = targetField;
         }
 
         public void Down()
         {
+            if(!canDown) return;
+            
         }
 
         public Vector2Int GetShadowPosition()

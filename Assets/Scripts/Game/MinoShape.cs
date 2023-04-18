@@ -62,6 +62,18 @@ namespace Tetris.Game
             0, 0, 0, 0
         };
 
+        public byte[,] GetShape()
+        {
+            var result = new byte[_width, _height];
+
+            for (var x = 0; x < _width; x++)
+            {
+                for (var y = 0; y < _height; y++) result[x, y] = this[x, y];
+            }
+
+            return result;
+        }
+
         public byte this[int x, int y]
         {
             get => data[y * _width + x];
