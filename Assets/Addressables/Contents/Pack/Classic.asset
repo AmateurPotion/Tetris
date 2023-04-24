@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbd2266091e4cd6998fa85a1288b224, type: 3}
   m_Name: Classic
   m_EditorClassIdentifier: 
-  color1: {fileID: 0}
+  color1: {fileID: 11400000, guid: 9ac480930278c4e44bd4f016dd37e1ac, type: 2}
   color2: {fileID: 0}
   color3: {fileID: 0}
   color4: {fileID: 0}
@@ -20,5 +20,5 @@ MonoBehaviour:
   color6: {fileID: 0}
   color7: {fileID: 0}
   color8: {fileID: 0}
-  shadow: {fileID: 0}
-  blocked: {fileID: 0}
+  shadowTile: {fileID: 0}
+  blockedTile: {fileID: 0}

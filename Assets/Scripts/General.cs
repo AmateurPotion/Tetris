@@ -9,6 +9,7 @@ namespace Tetris
         // Settings
         // staticMode | false(default) - frame time / true - ms time 
         public static (int frame, float ms, bool staticMode) ARR, DAS, SDF;
+        public static TexturePack activeTexture;
 
         // Contents
         public static Dictionary<string, MinoShape> shapes => MinoShape.allocated;
@@ -22,6 +23,7 @@ namespace Tetris
                 PlayerPrefs.GetInt("das_m", 0) == 1);
             SDF = (PlayerPrefs.GetInt("sdf_i", 1), PlayerPrefs.GetFloat("sdf_f", 1),
                 PlayerPrefs.GetInt("sdf_m", 0) == 1);
+            
         }
     }
 }
