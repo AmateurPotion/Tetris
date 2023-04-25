@@ -1,7 +1,8 @@
 ﻿#if UNITY_EDITOR
 using System;
-using Tetris.Graphics;
+using Tetris.Graphics.Builder;
 using UnityEditor;
+using UnityEditor.U2D;
 using UnityEngine;
 
 namespace Tetris.Editor.Builder
@@ -35,11 +36,13 @@ namespace Tetris.Editor.Builder
 
             if (GUILayout.Button("Info") && _tile != null)
             {
+                /*
                 for (var i = 0; i < _tile.m_TilingRules.Count; i++)
                 {
                     var rule = _tile.m_TilingRules[i];
                     Debug.Log($"id {rule.m_Id}: {string.Join(" / ", rule.m_Neighbors)}");
                 }
+                */
             }
 
             if (GUILayout.Button("Build"))
