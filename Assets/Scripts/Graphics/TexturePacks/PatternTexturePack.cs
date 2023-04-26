@@ -1,35 +1,60 @@
 ﻿using System;
+using System.Collections.Generic;
+using Tetris.Utils.Extensions;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace Tetris.Graphics.TexturePacks
 {
     [CreateAssetMenu(fileName = "new Pattern Texture Pack", menuName = "Tetris/Texture/Pattern Texture", order = 0)]
     public class PatternTexturePack : TexturePack
     {
-        public RuleTile pattern;
-        private Tilemap map;
+        public RuleTile pattern, shadow, special;
+        private List<RuleTile> _colorPatterns;
 
         private void OnEnable()
         {
-            for (var i = 0; i < pattern.m_TilingRules.Count; i++)
+            for (var i = 0; i < 8; i++)
             {
-                var tile = pattern.m_TilingRules[i];
+                var colorPattern = CreateInstance<RuleTile>();
+
+                for (var j = 0; j < pattern.m_TilingRules.Count; j++)
+                {
+                    var rule = pattern.m_TilingRules[j].Clone();
+                    var prevSprite = rule.m_Sprites[0];
+                    var sprite = Sprite.Create(prevSprite.texture.Clone(), prevSprite.rect, prevSprite.pivot,
+                        prevSprite.pixelsPerUnit);
+                    
+                    sprite.SetColor(j switch
+                    {
+                        0 => Color.red,
+                        1 => new Color(0.93f, 0.52f, 0f),
+                        2 => Color.yellow,
+                        3 => Color.green,
+                        4 => Color.cyan,
+                        5 => Color.blue,
+                        6 => new Color(0.55f, 0.06f, 0.75f),
+                        7 => Color.gray,
+                        _ => throw new InvalidOperationException()
+                    });
+                    colorPattern.m_TilingRules.Add(rule);
+                }
+                
+                _colorPatterns.Add(colorPattern);
             }
         }
 
-        public override RuleTile GetTile(Tile type) => type switch
+        public override RuleTile GetTile(TileType type) => type switch
         {
-            Tile.Color1 => pattern,
-            Tile.Color2 => pattern,
-            Tile.Color3 => pattern,
-            Tile.Color4 => pattern,
-            Tile.Color5 => pattern,
-            Tile.Color6 => pattern,
-            Tile.Color7 => pattern,
-            Tile.Color8 => pattern,
-            Tile.Shadow => pattern,
-            Tile.Blocked => pattern,
+            TileType.Color1 => _colorPatterns[0],
+            TileType.Color2 => _colorPatterns[1],
+            TileType.Color3 => _colorPatterns[2],
+            TileType.Color4 => _colorPatterns[3],
+            TileType.Color5 => _colorPatterns[4],
+            TileType.Color6 => _colorPatterns[5],
+            TileType.Color7 => _colorPatterns[6],
+            TileType.Color8 => _colorPatterns[7],
+            TileType.Shadow => shadow,
+            TileType.Blocked => special,
             _ => throw new ArgumentException(nameof(type))
         };
     }

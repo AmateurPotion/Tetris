@@ -25,7 +25,7 @@ namespace Tetris.Utils.Extensions
             }
         }
 
-        public static Texture2D Replicate(this Texture2D origin)
+        public static Texture2D Clone(this Texture2D origin)
         {
             var result = new Texture2D(origin.width, origin.height, origin.format, origin.mipmapCount, true);
             
