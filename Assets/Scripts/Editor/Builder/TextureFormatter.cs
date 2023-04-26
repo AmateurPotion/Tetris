@@ -7,8 +7,10 @@ namespace Tetris.Editor.Builder
 {
     public class TextureFormatter : EditorWindow
     {
-        private TextureType _formatterType = TextureType.Texture2D;
-        private Texture2D _texture2D;
+        private TextureType _formatterType = TextureType.Texture2DReplicate;
+
+        // Texture 2D
+        private Texture2D _texture2DOrigin, _texture2DTarget;
 
         [MenuItem("Builder/Texture Formatter")]
         private static void ShowWindow()
@@ -24,21 +26,22 @@ namespace Tetris.Editor.Builder
 
             switch (_formatterType)
             {
-                case TextureType.Texture2D:
+                case TextureType.Texture2DReplicate:
                 {
-                    _texture2D =
-                        (Texture2D)EditorGUILayout.ObjectField("texture", _texture2D, typeof(Texture2D), false);
+                    _texture2DOrigin =
+                        (Texture2D)EditorGUILayout.ObjectField("origin texture", _texture2DOrigin, typeof(Texture2D),
+                            false);
+                    _texture2DTarget = (Texture2D)EditorGUILayout.ObjectField("target texture", _texture2DTarget,
+                        typeof(Texture2D), false);
 
                     if (
-                        GUILayout.Button("info") &&
-                        _texture2D != null &&
-                        _texture2D.TryGetMetadata(out var metadataList, out var metaPath)
+                        GUILayout.Button("Replicate Format") &&
+                        _texture2DOrigin != null &&
+                        _texture2DOrigin.TryGetMetadata(out var metadataList, out var metaPath) &&
+                        _texture2DTarget != null
                     )
                     {
-                        foreach (var meta in metadataList)
-                        {
-                            Debug.Log(meta.name);
-                        }
+                        
                     }
 
                     break;
@@ -55,7 +58,7 @@ namespace Tetris.Editor.Builder
 
         public enum TextureType
         {
-            Texture2D,
+            Texture2DReplicate,
             Texture3D
         }
     }

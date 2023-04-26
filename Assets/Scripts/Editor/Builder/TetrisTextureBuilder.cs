@@ -15,7 +15,7 @@ namespace Tetris.Editor.Builder
         private TetrisTextureBuildType _buildType;
         
         [MenuItem("Builder/Tetris texture Builder")]
-        private static void ShowWindow()
+        public static void ShowWindow()
         {
             var window = GetWindow<TetrisTextureBuilder>();
             window.titleContent = new GUIContent("Tetris texture Builder");
