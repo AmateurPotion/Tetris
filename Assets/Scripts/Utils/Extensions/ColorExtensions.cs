@@ -56,5 +56,12 @@ namespace Tetris.Utils.Extensions
             action();
             UnityEngine.GUI.color = before;
         }
+
+        public static Color Mix(this Color origin, Color target) => new(
+            (origin.r + target.r) / 2,
+            (origin.g + target.g) / 2,
+            (origin.b + target.b) / 2,
+            origin.a
+            );
     }
 }
