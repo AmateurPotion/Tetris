@@ -16,6 +16,18 @@ namespace Tetris.Graphics.TexturePacks
             for (var i = 0; i < 8; i++)
             {
                 var colorPattern = CreateInstance<RuleTile>();
+                var currentColor = i switch
+                {
+                    0 => Color.red,
+                    1 => new Color(0.93f, 0.52f, 0f),
+                    2 => Color.yellow,
+                    3 => Color.green,
+                    4 => Color.cyan,
+                    5 => Color.blue,
+                    6 => new Color(0.55f, 0.06f, 0.75f),
+                    7 => Color.gray,
+                    _ => throw new InvalidOperationException()
+                };
 
                 for (var j = 0; j < pattern.m_TilingRules.Count; j++)
                 {
@@ -24,18 +36,7 @@ namespace Tetris.Graphics.TexturePacks
                     var sprite = Sprite.Create(prevSprite.texture.Clone(), prevSprite.rect, prevSprite.pivot,
                         prevSprite.pixelsPerUnit);
                     
-                    sprite.SetColor(j switch
-                    {
-                        0 => Color.red,
-                        1 => new Color(0.93f, 0.52f, 0f),
-                        2 => Color.yellow,
-                        3 => Color.green,
-                        4 => Color.cyan,
-                        5 => Color.blue,
-                        6 => new Color(0.55f, 0.06f, 0.75f),
-                        7 => Color.gray,
-                        _ => throw new InvalidOperationException()
-                    });
+                    sprite.SetColor(currentColor);
                     colorPattern.m_TilingRules.Add(rule);
                 }
                 
