@@ -3,7 +3,7 @@
 namespace Tetris.Graphics.TexturePacks
 {
     //[CreateAssetMenu(fileName = "new Tetris Texture Pack", menuName = "Tetris/Texture pack", order = 0)]
-    public abstract class TexturePack : ScriptableObject
+    public abstract class TetrisTexturePack : ScriptableObject
     {
         public abstract RuleTile GetTile(TileType type);
     }

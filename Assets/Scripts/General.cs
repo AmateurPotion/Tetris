@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Tetris.Game;
+using Tetris.Game.Tetris;
 using Tetris.Graphics.TexturePacks;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Tetris
         // Settings
         // staticMode | false(default) - frame time / true - ms time 
         public static (int frame, float ms, bool staticMode) ARR, DAS, SDF;
-        public static TexturePack activeTexture;
+        public static TetrisTexturePack activeTetrisTexture;
 
         // Contents
         public static Dictionary<string, MinoShape> shapes => MinoShape.allocated;

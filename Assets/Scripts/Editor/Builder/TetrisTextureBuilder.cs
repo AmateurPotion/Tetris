@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 using System;
+using System.Data;
 using Tetris.Utils.Attributes;
 using UnityEditor;
 using UnityEngine;
@@ -46,7 +47,8 @@ namespace Tetris.Editor.Builder
 
                         if (_originTexture.TryGetMetadata(out var data, out var path))
                         {
-                            
+                            var target = _targetTexture;
+                            target.SetMultipleMetadata(data.ToArray());
                         }
 
                     }
@@ -61,20 +63,31 @@ namespace Tetris.Editor.Builder
                     {
                         // Null check
                         if (_origin == null) throw new ArgumentNullException(nameof(_origin));
-                        if (_tile == null) throw new ArgumentNullException(nameof(_tile));
+                        _tile = CreateInstance<RuleTile>();
+                        Rule
                 
+                        
                         // Processing...
                         for (var i = 0; i < _origin.m_TilingRules.Count; i++)
                         {
-                            var rule = _origin.m_TilingRules[i];
+                            var rule = _origin.m_TilingRules[i].Clone();
                             Debug.Log($"id {rule.m_Id}: {string.Join(" / ", rule.m_Neighbors)}");
                         }
 
                         // Save
-                        var path = EditorUtility.SaveFilePanel("Tilemap save path", _prevPath, "new Tetris Texture", "asset");
+                        try
+                        {
+                            var path = EditorUtility.SaveFilePanel("Tilemap save path", _prevPath, "new Tetris Texture",
+                                "asset");
+                            AssetDatabase.CreateAsset(_tile, path);
+                            AssetDatabase.SaveAssets();
+                        }
+                        catch (UnityException)
+                        {
+                            Debug.Log("파일 저장 취소됨");
+                        }
 
-                        AssetDatabase.CreateAsset(_tile, path);
-                        AssetDatabase.SaveAssets();
+                        
                     }
                     break;
                 }

@@ -1,4 +1,4 @@
-﻿using Tetris.Game;
+﻿using Tetris.Game.Tetris;
 using Tetris.Utils.Extensions;
 using UnityEditor;
 using UnityEngine;

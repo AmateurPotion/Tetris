@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace Tetris.Graphics.TexturePacks
 {
-    [CreateAssetMenu(fileName = "new Pattern Texture Pack", menuName = "Tetris/Texture/Pattern Texture", order = 0)]
-    public class PatternTexturePack : TexturePack
+    [CreateAssetMenu(fileName = "new Tetris Pattern Texture Pack", menuName = "Tetris/Texture/Pattern Texture", order = 0)]
+    public class TetrisPatternTexturePack : TetrisTexturePack
     {
         public RuleTile pattern, shadow, special;
         private List<RuleTile> _colorPatterns;

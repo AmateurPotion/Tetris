@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tetris.Game
+namespace Tetris.Game.Tetris
 {
     public class TetrominoComposite : MonoBehaviour
     {

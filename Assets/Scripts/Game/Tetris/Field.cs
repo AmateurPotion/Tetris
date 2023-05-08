@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Tetris.Utils;
 using Tetris.Utils.Attributes;
 using Tetris.Utils.Extensions;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.ResourceManagement.Util;
 using UnityEngine.Tilemaps;
 
-namespace Tetris.Game
+namespace Tetris.Game.Tetris
 {
     public class Field : ComponentSingleton<Field>
     {
